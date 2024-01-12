@@ -20,7 +20,7 @@ loginRouter.post("/", function (req, res) {
       })
   
       .catch((error) => {
-        res.json(error);
+        res.status(401).json(error);
       });
   });
 

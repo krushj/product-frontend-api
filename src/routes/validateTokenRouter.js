@@ -2,24 +2,26 @@ const express = require("express");
 const httpsAgent = require("../constants/httpAgent");
 const axios = require("axios");
 
-const userRouter = express.Router();
+const validateTokenRouter = express.Router();
 
-userRouter.get("", (req, res, next) => {
+validateTokenRouter.get("/", (req, res, next) => {
   const config = {
     method: "get", // or 'get', 'put', 'delete', etc.
     url: "https://dummyjson.com/auth/me",
     headers: {
-      Authorization: req.headers.authorization,
+      Authorization: `${req.headers.authorization}`,
     },
     httpsAgent, // Include the httpAgent in the configuration
   };
   axios(config)
     .then((response) => {
-      res.json(response.data);
+      res.status(200).json(true);
     })
     .catch((error) => {
-      res.status(500).json(error.error)
+      res.json(false);
     });
+
 });
 
-module.exports = userRouter;
+
+module.exports = validateTokenRouter;

@@ -17,9 +17,10 @@ productRouter.get("/", function (req, res) {
       res.status(200).json(response.data.products);
     })
     .catch((error) => {
-      res.json(error);
+      res.status(500).json(error.error)
     });
 });
+
 
 // get product of selected category
 productRouter.get("/category/:category", function (req, res) {
@@ -36,9 +37,10 @@ productRouter.get("/category/:category", function (req, res) {
       res.status(200).json(response.data.products);
     })
     .catch((error) => {
-      res.status(401).json(error);
+      res.status(500).json(error.error)
     });
 });
+
 
 // return the product categories
 productRouter.get("/categories", function (req, res) {
@@ -53,7 +55,7 @@ productRouter.get("/categories", function (req, res) {
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      res.json(error);
+      res.status(500).json(error.error)
     });
 });
 
@@ -71,26 +73,24 @@ productRouter.get("/search", function (req, res) {
       res.status(200).json(response.data.products);
     })
     .catch((error) => {
-      res.json(error);
+      res.status(500).json(error.error)
     });
 });
 
 // get a single product with given id
 productRouter.get("/:id", function (req, res) {
   const id = req.params["id"];
-
   const config = {
     method: "get", // or 'get', 'put', 'delete', etc.
     url: `https://dummyjson.com/products/${id}`,
     httpsAgent, // Include the httpAgent in the configuration
   };
-
   axios(config)
     .then((response) => {
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      res.status(401).json(error);
+      res.status(500).json(error.error)
     });
 });
 

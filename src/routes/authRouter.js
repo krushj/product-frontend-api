@@ -12,7 +12,7 @@ authRouter.get('/', (req, res, next) => {
         method: "get", // or 'get', 'put', 'delete', etc.
         url: "https://dummyjson.com/auth/me",
         headers: {
-            'Authorization' :req.headers.authorization, 
+            'Authorization' : req.headers.authorization, 
           },
         httpsAgent, // Include the httpAgent in the configuration
       };
